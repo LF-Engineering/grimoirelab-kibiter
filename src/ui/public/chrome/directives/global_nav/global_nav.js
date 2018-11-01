@@ -113,12 +113,26 @@ module.directive('globalNav', (es, kbnIndex, globalNavState, chrome) => {
          }
        }
       }).then(function (resp) {
-      	scope.$root.metadash = resp.hits.hits[0]._source.metadashboard;
+        const dashExclusions = [
+          'Data Status',
+          'Community',
+          'About'
+        ];
+
+        const metadash = resp.hits.hits[0]._source.metadashboard;
+        const metadashReplaced = angular.copy(metadash);
+
+        dashExclusions.forEach((excluded) => {
+          delete metadashReplaced[excluded];
+        });
+
+        scope.$root.metadash_pristine = metadash;
+      	scope.$root.metadash = metadashReplaced;
         scope.$root.loadedMetadashboard = true;
         scope.$root.showDefaultMenu = false;
       })
 
-      scope.$root.appTitleCustom = "Bitergia"
+      scope.$root.appTitleCustom = "Developer Analytics"
       es.search({
        index: '.kibana',
        body: {
@@ -129,7 +143,7 @@ module.directive('globalNav', (es, kbnIndex, globalNavState, chrome) => {
          }
        }
       }).then(function (resp) {
-      	scope.$root.appTitleCustom = resp.hits.hits[0]._source.projectname.name;
+      	scope.$root.appTitleCustom = 'Developer Analytics'; //resp.hits.hits[0]._source.projectname.name;
       })
     }
   };

@@ -9,25 +9,25 @@
     <a href="{{ getHref('/app/kibana#/dashboard/Overview') }}">
       <li
         ng-if="!logoBrand && !smallLogoBrand"
-        aria-label="Bitergia Logo"
+        aria-label="Logo"
         class="logo kibana"
       ></li>
 
       <li
         ng-if="logoBrand"
         ng-style="{ 'background': logoBrand }"
-        aria-label="Bitergia Logo"
+        aria-label="Logo"
         class="logo hidden-sm"
       ></li>
 
       <li
         ng-if="smallLogoBrand"
         ng-style="{ 'background': smallLogoBrand }"
-        aria-label="Bitergia Logo"
+        aria-label="Logo"
         class="logo-small visible-sm hidden-xs"
       ></li>
       <li
-      style="background-color: #444; color: #fff; max-height: 25px; overflow: hidden;"
+      style=" border: solid 1px #D9D9D9; border-right: none; list-style: none; background-color: #F5F5F5; color: #143a60; min-height: 38px;max-height: 38px; padding-left: 0.5em; padding-top: 0.5em;  margin-top: -2px; overflow: hidden;  list-style: none; "
       >{{$root.appTitleCustom}}</li>
     </a>
   </div>
