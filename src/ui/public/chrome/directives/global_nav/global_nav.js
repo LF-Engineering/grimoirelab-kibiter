@@ -132,7 +132,7 @@ module.directive('globalNav', (es, kbnIndex, globalNavState, chrome) => {
         scope.$root.showDefaultMenu = false;
       })
 
-      scope.$root.appTitleCustom = "Developer Analytics"
+      scope.$root.appTitleCustom = "ONOS";
       es.search({
        index: '.kibana',
        body: {
@@ -143,7 +143,7 @@ module.directive('globalNav', (es, kbnIndex, globalNavState, chrome) => {
          }
        }
       }).then(function (resp) {
-      	scope.$root.appTitleCustom = 'Developer Analytics'; //resp.hits.hits[0]._source.projectname.name;
+      	scope.$root.appTitleCustom = 'ONOS'; //resp.hits.hits[0]._source.projectname.name;
       })
     }
   };

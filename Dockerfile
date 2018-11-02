@@ -11,6 +11,7 @@ RUN groupadd --system kibana && \
     useradd --system --create-home --gid kibana kibana
 
 ADD . kibiter/
+COPY lfda/favicons/* kibiter/src/ui/public/assets/favicons/
 
 # backports used to install java 8 needed by elasticsearch 5
 # ruby gems are used for building binary packages
