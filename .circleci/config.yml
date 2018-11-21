@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: 077912721727.dkr.ecr.us-west-2.amazonaws.com/lfda/circle-docker-build-base:0.1
+    working_directory: /build
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: version
+          command: echo `extract_version`
+      - run:
+          name: version_tag
+          command: echo `extract_version_tag`
+      - run:
+          name: collect_tags
+          command: echo `collect_tags`
+      - run:
+          name: build
+          command: |
+            docker build \
+              -t kibiter:build \
+              -f Dockerfile .
+      - run:
+          name: push
+          command: |
+            REPO=077912721727.dkr.ecr.us-west-2.amazonaws.com \
+            push_tagged_images kibiter:build lfda/kibiter
