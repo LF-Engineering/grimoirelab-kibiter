@@ -88,8 +88,8 @@ RUN apt-get update && \
 # grab gosu for easy step-down from root
 RUN set -ex && \
   key=B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-  gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys $key || \
-  gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys $key
+  gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
+  gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key"
 
 RUN arch="$(dpkg --print-architecture)" \
 	&& set -x \
