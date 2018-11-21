@@ -85,8 +85,13 @@ RUN apt-get update && \
     bash -c 'localedef --list-archive | grep -v -e "en_US" | xargs localedef --delete-from-archive' && \
     rm -rf /usr/share/doc/*
 
+ENV GPG_KEYS=B42F6819007F00F88E364FD4036A9C25BF357DD4
+
 # grab gosu for easy step-down from root
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN ( gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEYS" \
+  || gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEYS" \
+  || gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEYS" )
+
 RUN arch="$(dpkg --print-architecture)" \
 	&& set -x \
 	&& curl -o /usr/local/bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.3/gosu-$arch" \
